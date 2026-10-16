@@ -1,0 +1,9 @@
+node_modules/
+dist/
+entrega/
+*.zip
+.DS_Store
+.env*
+.codex/
+.agents/
+reports/

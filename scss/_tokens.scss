@@ -1,0 +1,12 @@
+$paper: #f7f7f2;
+$ink: #20231e;
+$blue: #2447ec;
+$muted: #676c62;
+$line: #dedfd7;
+$peach: #f2d8cc;
+$mint: #e4eddb;
+$lavender: #e9e6f5;
+
+@mixin mobile { @media (max-width: 760px) { @content; } }
+@mixin tablet { @media (max-width: 1050px) { @content; } }
+@mixin focus-ring { outline: 3px solid $blue; outline-offset: 5px; }
