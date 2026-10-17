@@ -10,7 +10,7 @@ El CSS y AOS ya están incluidos. Para ver la portada se puede abrir `index.html
 npm start
 ```
 
-Abrir **http://localhost:4177**. No hace falta instalar dependencias para iniciar el servidor.
+
 
 ## Editar y compilar SCSS
 
