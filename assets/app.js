@@ -122,6 +122,25 @@ document.querySelector('#dialog-consult').addEventListener('click', () => {
 });
 document.querySelectorAll('[data-service]').forEach(link => link.addEventListener('click', () => { serviceSelect.value = link.dataset.service; }));
 
+const certificateDialog = document.querySelector('#certificate-dialog');
+const certificateTrigger = document.querySelector('#open-certificate');
+certificateTrigger.addEventListener('click', event => {
+  event.preventDefault();
+  certificateDialog.showModal();
+  document.body.classList.add('dialog-open');
+  certificateDialog.scrollTop = 0;
+});
+document.querySelector('.certificate-close').addEventListener('click', () => certificateDialog.close());
+certificateDialog.addEventListener('click', event => {
+  if (event.target !== certificateDialog) return;
+  const box = certificateDialog.getBoundingClientRect();
+  if (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom) certificateDialog.close();
+});
+certificateDialog.addEventListener('close', () => {
+  document.body.classList.remove('dialog-open');
+  certificateTrigger.focus({ preventScroll: true });
+});
+
 const contactForm = document.querySelector('#contact-form');
 contactForm.addEventListener('submit', event => {
   event.preventDefault();

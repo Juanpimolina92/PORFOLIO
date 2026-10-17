@@ -1,12 +1,18 @@
 $paper: #f7f7f2;
 $ink: #20231e;
-$blue: #2447ec;
+$accent: #24513b;
+$accent-deep: #542c21;
+$accent-hover: #183a2a;
+$accent-soft: #c5d6bc;
+$footer-bg: #e9dcc9;
+$footer-text: #252522;
+$selection: #667140;
 $muted: #676c62;
 $line: #dedfd7;
 $peach: #f2d8cc;
 $mint: #e4eddb;
-$lavender: #e9e6f5;
+$sand: #f0e5db;
 
 @mixin mobile { @media (max-width: 760px) { @content; } }
 @mixin tablet { @media (max-width: 1050px) { @content; } }
-@mixin focus-ring { outline: 3px solid $blue; outline-offset: 5px; }
+@mixin focus-ring { outline: 3px solid $accent; outline-offset: 5px; }

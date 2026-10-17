@@ -31,7 +31,7 @@ for(const file of await walk(root)) {
     try{await stat(target);}catch{errors.push(`${file.slice(root.length+1)} → falta ${ref}`);}
   }
 }
-for(const file of ['assets/app.js','assets/social.js','scripts/build.mjs','scripts/serve.mjs']) {
+for(const file of ['assets/app.js','assets/social.js','assets/interactive-effects.js','scripts/build-effects.mjs','scripts/build.mjs','scripts/serve.mjs']) {
   const result=spawnSync(process.execPath,['--check',resolve(root,file)],{encoding:'utf8'});
   if(result.status!==0)errors.push(result.stderr||`Error de sintaxis: ${file}`);
 }

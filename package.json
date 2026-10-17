@@ -3,14 +3,24 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Portfolio de Juan Pablo Molina · Diseño Web. HTML, SCSS, JavaScript y AOS.",
+  "description": "Portfolio de Juan Pablo Molina · Diseño Web. HTML, SCSS, JavaScript, React y AOS.",
   "scripts": {
     "dev": "node scripts/serve.mjs",
     "start": "node scripts/serve.mjs",
     "build:css": "sass scss/main.scss assets/styles.css --style=compressed --no-source-map",
-    "build": "npm run build:css && node scripts/build.mjs",
+    "build:effects": "node scripts/build-effects.mjs",
+    "build": "npm run build:css && npm run build:effects && node scripts/build.mjs",
     "check": "node scripts/check.mjs"
   },
-  "devDependencies": { "sass": "1.93.2" },
-  "engines": { "node": ">=20" }
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "sass": "1.93.2"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  }
 }

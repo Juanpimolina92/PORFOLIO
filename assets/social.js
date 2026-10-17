@@ -1,13 +1,13 @@
 'use strict';
 
-const palette = { blue: '#2447ec', paper: '#f7f7f2', ink: '#20231e', peach: '#efd5db', mint: '#e3e9d7', sky: '#dce7ef' };
+const palette = { accent: '#a34b2d', paper: '#f7f7f2', ink: '#20231e', peach: '#efd5db', mint: '#e3e9d7', sand: '#eee4d9' };
 const socialPieces = [
-  { id: '01-presentacion', title: '01 · Tu próxima web', kind: 'cover', width:1080, height:1350, label:'DISEÑO WEB CON PROPÓSITO', lines:['Tu idea merece', 'una gran web.'], bg:palette.blue, color:palette.paper, image:'assets/images/mawe-desktop.jpg' },
+  { id: '01-presentacion', title: '01 · Tu próxima web', kind: 'cover', width:1080, height:1350, label:'DISEÑO WEB CON PROPÓSITO', lines:['Tu idea merece', 'una gran web.'], bg:palette.accent, color:palette.paper, image:'assets/images/mawe-desktop.jpg' },
   { id: '02-mawe', title: '02 · Mawe', kind:'project', width:1080, height:1350, label:'CATÁLOGO & EMPRENDIMIENTO', lines:['Mawe.', 'Una marca con', 'mucho para celebrar.'], bg:palette.peach, color:'#71394d', image:'assets/images/mawe-desktop.jpg', sub:'Catálogo interactivo · Consultas por WhatsApp' },
-  { id: '03-contador', title:'03 · Federico Molina', kind:'project', width:1080, height:1350, label:'WEB PARA MARCA PROFESIONAL', lines:['Federico Molina.', 'Una presencia', 'que da confianza.'], bg:palette.sky, color:'#1f465e', image:'assets/images/contador-desktop.png', sub:'Servicios claros · Contacto directo' },
+  { id: '03-contador', title:'03 · Federico Molina', kind:'project', width:1080, height:1350, label:'WEB PARA MARCA PROFESIONAL', lines:['Federico Molina.', 'Una presencia', 'que da confianza.'], bg:palette.sand, color:'#684a35', image:'assets/images/contador-desktop.png', sub:'Servicios claros · Contacto directo' },
   { id: '04-valen', title:'04 · Valen & amigos', kind:'project', width:1080, height:1350, label:'EXPERIENCIA INTERACTIVA', lines:['Valen & amigos.', 'Un mundo para', 'descubrir jugando.'], bg:palette.mint, color:'#426044', image:'assets/images/valen-desktop.png', sub:'Juegos · Palabras · Colores · Sonidos' },
   { id: '05-contacto', title:'05 · Hagámoslo realidad', kind:'contact', width:1080, height:1350, label:'EL PRÓXIMO PROYECTO PUEDE SER EL TUYO', lines:['Vos ponés', 'la idea.', 'Yo, el código.'], bg:palette.ink, color:palette.paper },
-  { id: '06-historia', title:'06 · Historia', kind:'story', width:1080, height:1920, label:'JUAN PABLO MOLINA · DISEÑO WEB', lines:['Tu negocio,', 'en su mejor', 'versión web.'], bg:palette.blue, color:palette.paper, image:'assets/images/mawe-desktop.jpg' }
+  { id: '06-historia', title:'06 · Historia', kind:'story', width:1080, height:1920, label:'JUAN PABLO MOLINA · DISEÑO WEB', lines:['Tu negocio,', 'en su mejor', 'versión web.'], bg:palette.accent, color:palette.paper, image:'assets/images/mawe-desktop.jpg' }
 ];
 
 function text(ctx, value, x, y, size, color, weight=500) {
@@ -42,7 +42,7 @@ async function renderPiece(piece,index) {
     piece.lines.forEach((line,i)=>text(ctx,line,70,272+i*83,i===0?74:65,color,600));
     drawBrowser(ctx,image,74,580,932,482);text(ctx,piece.sub,74,1120,22,color,500);
   } else if(piece.kind==='contact') {
-    piece.lines.forEach((line,i)=>text(ctx,line,68,283+i*120,104,i===2?'#dbe9b9':color,600));spark(ctx,906,586,86,'#a6b3ff');
+    piece.lines.forEach((line,i)=>text(ctx,line,68,283+i*120,104,i===2?'#dbe9b9':color,600));spark(ctx,906,586,86,'#efc4ac');
     text(ctx,'Landing pages · Webs profesionales',74,756,24,'#d2d7ca',450);text(ctx,'Catálogos digitales · Ideas a medida',74,799,24,'#d2d7ca',450);
     rounded(ctx,74,897,932,104,5,'#e2f1be');text(ctx,'Conversemos de tu próxima web',106,930,28,palette.ink,600);arrow(ctx,917,929,33,palette.ink);
     text(ctx,'WHATSAPP  +54 9 264 415 1881',74,1050,26,color,600);text(ctx,'molinapablo72@gmail.com',74,1102,24,color,450);text(ctx,'github.com/Juanpimolina92',74,1150,20,'#d2d7ca',450);
