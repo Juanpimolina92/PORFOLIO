@@ -3,13 +3,16 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Portfolio de Juan Pablo Molina · Diseño Web. HTML, SCSS, JavaScript, React y AOS.",
+  "description": "Portfolio de Juan Pablo Molina con Next.js, React, Three.js y geometría generada en Python.",
   "scripts": {
-    "dev": "node scripts/serve.mjs",
+    "dev": "npm run build:css && node scripts/prepare-next.mjs && next dev --hostname 127.0.0.1",
+    "dev:static": "node scripts/serve.mjs",
     "start": "node scripts/serve.mjs",
     "build:css": "sass scss/main.scss assets/styles.css --style=compressed --no-source-map",
     "build:effects": "node scripts/build-effects.mjs",
-    "build": "npm run build:css && npm run build:effects && node scripts/build.mjs",
+    "generate:hero": "python scripts/generate-hero.py",
+    "build:static": "npm run build:css && npm run build:effects && node scripts/build.mjs",
+    "build": "npm run build:static && node scripts/prepare-next.mjs && next build",
     "check": "node scripts/check.mjs"
   },
   "devDependencies": {
@@ -20,7 +23,9 @@
     "node": ">=20"
   },
   "dependencies": {
+    "next": "^16.4.2",
     "react": "^19.3.1",
-    "react-dom": "^19.3.1"
+    "react-dom": "^19.3.1",
+    "three": "^0.186.1"
   }
 }

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { createRoot } from 'react-dom/client';
+import { createPortal } from 'react-dom';
+import { HeroScene } from './hero-scene.jsx';
 
 function useProjectSpotlights() {
   useEffect(() => {
@@ -16,17 +17,30 @@ function useProjectSpotlights() {
         frame = requestAnimationFrame(() => {
           card.style.setProperty('--spot-x', `${x}px`);
           card.style.setProperty('--spot-y', `${y}px`);
+          card.style.setProperty('--tilt-x', `${-(y / box.height - 0.5) * 7}deg`);
+          card.style.setProperty('--tilt-y', `${(x / box.width - 0.5) * 9}deg`);
         });
       };
-      const leave = () => cancelAnimationFrame(frame);
-      card.addEventListener('pointermove', move, { passive: true });
-      card.addEventListener('pointerleave', leave);
-      return () => {
+      const leave = () => {
         cancelAnimationFrame(frame);
-        card.removeEventListener('pointermove', move);
-        card.removeEventListener('pointerleave', leave);
+        card.style.removeProperty('--tilt-x');
+        card.style.removeProperty('--tilt-y');
         card.style.removeProperty('--spot-x');
         card.style.removeProperty('--spot-y');
+      };
+      const resetOnPause = () => { if (reducedMotion.matches || document.documentElement.classList.contains('no-motion')) leave(); };
+      const observer = new MutationObserver(resetOnPause);
+      observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+      reducedMotion.addEventListener('change', resetOnPause);
+      card.addEventListener('pointermove', move, { passive: true });
+      card.addEventListener('pointerleave', leave);
+      card.addEventListener('blur', leave);
+      return () => {
+        leave(); observer.disconnect();
+        reducedMotion.removeEventListener('change', resetOnPause);
+        card.removeEventListener('pointermove', move);
+        card.removeEventListener('pointerleave', leave);
+        card.removeEventListener('blur', leave);
       };
     });
     return () => cleanups.forEach(cleanup => cleanup());
@@ -35,7 +49,6 @@ function useProjectSpotlights() {
 
 function NavigationAccent({ navigation }) {
   const [indicator, setIndicator] = useState({ x: 0, y: 0, width: 0, height: 0, visible: false });
-  useProjectSpotlights();
 
   useEffect(() => {
     let hovered = null;
@@ -109,11 +122,22 @@ function NavigationAccent({ navigation }) {
   />;
 }
 
-const navigation = document.querySelector('#navigation');
-if (navigation) {
-  const mount = document.createElement('div');
-  mount.className = 'nav-react-layer';
-  mount.setAttribute('aria-hidden', 'true');
-  navigation.prepend(mount);
-  createRoot(mount).render(<NavigationAccent navigation={navigation} />);
+export function InteractiveEffects() {
+  const [targets, setTargets] = useState(null);
+  useProjectSpotlights();
+  useEffect(() => {
+    const navigation = document.querySelector('#navigation');
+    const hero = document.querySelector('#hero-scene');
+    const mount = document.createElement('div');
+    mount.className = 'nav-react-layer';
+    mount.setAttribute('aria-hidden', 'true');
+    navigation?.prepend(mount);
+    setTargets({ navigation, mount, hero });
+    return () => mount.remove();
+  }, []);
+  if (!targets) return null;
+  return <>
+    {targets.navigation && createPortal(<NavigationAccent navigation={targets.navigation} />, targets.mount)}
+    {targets.hero && createPortal(<HeroScene />, targets.hero)}
+  </>;
 }

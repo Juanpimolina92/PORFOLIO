@@ -1,4 +1,5 @@
 @use 'tokens' as *;
+@use 'sass:meta';
 
 @font-face{font-family:Montserrat;src:url('fonts/Montserrat.ttf') format('truetype');font-weight:100 900;font-style:normal;font-display:swap}
 *,*::before,*::after{box-sizing:border-box}
@@ -268,3 +269,4 @@ em{font-family:Georgia,serif;font-weight:400;letter-spacing:-.04em}
 }
 @media(max-width:370px){.wrap{width:calc(100% - 32px)}.hero-copy h1{font-size:38px}.hero-actions{gap:12px}.hero-actions .button{padding:15px 13px;font-size:9px}.hero-actions .quiet-link{font-size:9px}.hero-showcase{height:345px}.browser-front{top:140px}.phone-preview{height:151px;width:76px}.showcase-note{left:17px;font-size:12px}.showcase-badge{font-size:6px;top:121px}.project-visual,.project-featured .project-visual{height:245px}.project-browser,.project-featured .project-browser{max-height:162px}.project-filters button{font-size:7px;padding:8px 9px}.process-grid{gap:25px 18px}.contact-copy h2{font-size:57px}.contact-copy h2>span{right:18px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}[data-aos]{opacity:1!important;transform:none!important}.accent-word svg{stroke-dashoffset:0}}
+@include meta.load-css('depth');

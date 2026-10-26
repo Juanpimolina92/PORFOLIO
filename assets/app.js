@@ -2,19 +2,19 @@
 
 const projects = {
   mawe: {
-    title: 'Mawe', category: 'CATÁLOGO & EMPRENDIMIENTO', image: 'assets/images/mawe-desktop.jpg', demo: 'proyectos/mawe/', service: 'Catálogo digital',
+    title: 'Mawe', category: 'CATÁLOGO & EMPRENDIMIENTO', image: 'assets/images/mawe-desktop.jpg', demo: 'proyectos/mawe/index.html', service: 'Catálogo digital',
     description: 'El mundo de Marieta convertido en una web: colores suaves, una identidad cercana y un catálogo que invita a descubrir sus imprimibles y kits.',
     features: ['Catálogo con filtros por categoría y detalle de cada diseño.', 'Consultas de productos por WhatsApp.', 'Galería, preguntas frecuentes y diseño adaptable a celulares.'],
     note: 'HTML, SCSS, JavaScript, Bootstrap y AOS. La demo conserva los enlaces de contacto del emprendimiento.'
   },
   contador: {
-    title: 'Federico Molina', category: 'WEB PARA MARCA PROFESIONAL', image: 'assets/images/contador-desktop.png', demo: 'proyectos/contador/', service: 'Web profesional',
+    title: 'Federico Molina', category: 'WEB PARA MARCA PROFESIONAL', image: 'assets/images/contador-desktop.png', demo: 'proyectos/contador/index.html', service: 'Web profesional',
     description: 'Una web para presentar servicios contables con claridad. La identidad visual acompaña una experiencia de lectura ordenada y un camino directo a la consulta.',
     features: ['Presentación de servicios contables y forma de trabajo.', 'Formulario que prepara la consulta por WhatsApp.', 'Panel interactivo de demostración para distintos tipos de negocio.'],
     note: 'HTML, SCSS, JavaScript y Bootstrap. El panel muestra datos ficticios; no es un sistema de gestión conectado. La demo conserva el contacto del profesional.'
   },
   valen: {
-    title: 'Valen & amigos', category: 'APRENDER A TRAVÉS DEL JUEGO', image: 'assets/images/valen-desktop.png', demo: 'proyectos/valen/', service: 'Experiencia a medida',
+    title: 'Valen & amigos', category: 'APRENDER A TRAVÉS DEL JUEGO', image: 'assets/images/valen-desktop.png', demo: 'proyectos/valen/index.html', service: 'Experiencia a medida',
     description: 'Una experiencia pensada para descubrir jugando: personajes, pequeñas actividades y sonidos que acompañan cada interacción.',
     features: ['Actividades de palabras, colores, números y familia.', 'Audios y consignas para explorar juntos.', 'Ajustes de nombre, volumen y ritmo guardados en el navegador.'],
     note: 'HTML, CSS y JavaScript. La demo usa sonido; podés silenciarlo desde el encabezado.'
@@ -22,7 +22,7 @@ const projects = {
 };
 
 const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-const motionButton = document.querySelector('.motion-toggle');
+const motionButtons = [...document.querySelectorAll('.motion-toggle, .hero-motion-toggle')];
 let manualPause = false;
 let aosReady = false;
 try { manualPause = localStorage.getItem('jp-motion-paused') === 'true'; } catch {}
@@ -30,10 +30,13 @@ function isMotionPaused() { return manualPause || motionQuery.matches; }
 function updateMotion() {
   const paused = isMotionPaused();
   document.documentElement.classList.toggle('no-motion', paused);
-  motionButton.setAttribute('aria-pressed', String(paused));
-  motionButton.textContent = paused ? 'Animaciones pausadas' : 'Pausar animaciones';
-  if (motionQuery.matches) motionButton.title = 'Se respeta tu preferencia de movimiento reducido';
-  else motionButton.removeAttribute('title');
+  motionButtons.forEach(button => {
+    button.setAttribute('aria-pressed', String(paused));
+    const label = paused ? 'Reanudar animaciones' : 'Pausar animaciones';
+    button.setAttribute('aria-label', motionQuery.matches ? 'Movimiento reducido activado en tu sistema' : label);
+    button.textContent = button.classList.contains('hero-motion-toggle') ? (paused ? '▶' : 'Ⅱ') : (paused ? 'Animaciones pausadas' : label);
+    button.title = motionQuery.matches ? 'Se respeta tu preferencia de movimiento reducido' : label;
+  });
   if (!aosReady && window.AOS && !paused) {
     try { window.AOS.init({ duration: 750, offset: 55, once: true, easing: 'ease-out-cubic', disable: () => isMotionPaused() }); aosReady = true; }
     catch { document.documentElement.classList.add('aos-unavailable'); }
@@ -41,11 +44,11 @@ function updateMotion() {
   if (!window.AOS) document.documentElement.classList.add('aos-unavailable');
   if (paused) document.querySelectorAll('.hero-showcase .mini-browser, .hero-showcase .phone-preview').forEach(el => { el.style.translate = ''; });
 }
-motionButton.addEventListener('click', () => {
+motionButtons.forEach(button => button.addEventListener('click', () => {
   manualPause = !manualPause;
   try { localStorage.setItem('jp-motion-paused', String(manualPause)); } catch {}
   updateMotion();
-});
+}));
 motionQuery.addEventListener('change', updateMotion);
 updateMotion();
 

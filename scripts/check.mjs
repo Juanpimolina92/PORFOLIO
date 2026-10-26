@@ -8,7 +8,7 @@ const errors=[];let documents=0;let references=0;
 async function walk(folder) {
   const files=[];
   for(const entry of await readdir(folder,{withFileTypes:true})) {
-    if(entry.name.startsWith('.')||['node_modules','dist','reports','entrega'].includes(entry.name))continue;
+    if(entry.name.startsWith('.')||['node_modules','dist','out','public','reports','entrega'].includes(entry.name))continue;
     const file=resolve(folder,entry.name);
     if(entry.isDirectory())files.push(...await walk(file));else files.push(file);
   }

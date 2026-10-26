@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="assets/styles.css">
   <script src="assets/vendor/aos.js" defer></script>
   <script src="assets/app.js" defer></script>
-  <script src="assets/interactive-effects.js" defer></script>
+  <script src="assets/interactive-effects.js" type="module"></script>
 </head>
 <body>
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -50,11 +50,13 @@
       </div>
       <div class="hero-showcase" aria-label="Una muestra de mis proyectos web">
         <div class="showcase-grid" aria-hidden="true"></div>
-        <span class="showcase-label">IDEAS QUE SE VUELVEN REALES</span>
+        <div id="hero-scene" class="hero-scene" aria-hidden="true"></div>
+        <span class="showcase-label"><span class="scene-dot" aria-hidden="true"></span> IDEAS EN OTRA DIMENSIÓN</span>
         <div class="mini-browser browser-back"><div class="browser-bar"><i></i><i></i><i></i><span>federico molina · contador</span></div><img src="assets/images/contador-desktop.png" alt="Diseño de la web de Federico Molina" width="1440" height="900" fetchpriority="high"></div>
         <div class="mini-browser browser-front"><div class="browser-bar"><i></i><i></i><i></i><span>mawe · el mundo lindo de Marieta</span><b>↗</b></div><img src="assets/images/mawe-desktop.jpg" alt="Página de inicio de Mawe con su catálogo de imprimibles" width="1905" height="980" fetchpriority="high"></div>
         <div class="phone-preview"><div class="phone-notch" aria-hidden="true"></div><img src="assets/images/valen-mobile.png" alt="Valen y amigos en un teléfono" width="390" height="844"></div>
-        <span class="orbit-spark" aria-hidden="true">✳</span>
+        <span class="scene-coordinate" aria-hidden="true">ESTUDIO CREATIVO / 01</span>
+        <button class="hero-motion-toggle" type="button" aria-pressed="false" aria-label="Pausar animaciones">Ⅱ</button>
         <span class="handwritten showcase-note">hechas para conectar <svg viewBox="0 0 100 45" aria-hidden="true"><path d="M3 5q60 40 87 6m-12-4 15 4-4 13"/></svg></span>
         <span class="showcase-badge"><svg class="icon"><use href="#phone"/></svg> Se ve bien.<br><strong>En todas las pantallas.</strong></span>
       </div>
@@ -131,7 +133,7 @@
   <a class="floating-contact" href="https://wa.me/5492644151881?text=Hola%20Juan%20Pablo%2C%20quiero%20consultarte%20por%20una%20web." target="_blank" rel="noopener noreferrer" aria-label="Consultar a Juan Pablo por WhatsApp"><svg class="icon"><use href="#whatsapp"/></svg><span>Hablemos</span></a>
 
   <dialog class="certificate-dialog" id="certificate-dialog" aria-labelledby="certificate-title"><div class="certificate-heading"><div><p class="eyebrow">FORMACIÓN · CODERHOUSE</p><h2 id="certificate-title">Desarrollo Web</h2></div><button class="certificate-close" type="button" aria-label="Cerrar certificado">×</button></div><img src="assets/images/certificado-desarrollo-web.png" alt="Certificado de Coderhouse que acredita que Juan Pablo Molina completó el curso de Desarrollo Web, de 10 semanas y 20 horas de formación, el 8 de octubre de 2026" width="1221" height="827" loading="lazy"><div class="certificate-footer"><p>Juan Pablo Molina · <time datetime="2026-10-08">8 de octubre de 2026</time></p><a href="assets/images/certificado-desarrollo-web.png" download="Juan-Pablo-Molina-Certificado-Desarrollo-Web.png">Descargar certificado ↓</a></div></dialog>
-  <dialog class="project-dialog" id="project-dialog" aria-labelledby="dialog-title"><button class="dialog-close" type="button" aria-label="Cerrar proyecto">×</button><div class="dialog-cover"><img id="dialog-image" src="assets/images/mawe-desktop.jpg" alt="" width="1440" height="900"></div><div class="dialog-content"><p class="eyebrow" id="dialog-category"></p><h2 id="dialog-title"></h2><p id="dialog-description"></p><ul id="dialog-features"></ul><p class="dialog-note" id="dialog-note"></p><div class="dialog-actions"><a class="button button-accent" id="dialog-demo" href="proyectos/mawe/" target="_blank" rel="noopener noreferrer">Recorrer la demo <svg class="icon"><use href="#arrow-up"/></svg></a><a class="quiet-link" id="dialog-consult" href="#contacto">Quiero una web así ↗</a></div></div></dialog>
-  <noscript><style>[data-aos]{opacity:1!important;transform:none!important}.menu-toggle,.project-filters,.motion-toggle{display:none!important}@media(max-width:760px){#navigation{display:flex!important;position:static;flex-wrap:wrap;box-shadow:none;border:0;padding:10px 0;gap:16px}.header-inner{flex-wrap:wrap}}</style><div class="noscript-note">Podés recorrer los proyectos en <a href="proyectos/mawe/">Mawe</a>, <a href="proyectos/contador/">Federico Molina</a> y <a href="proyectos/valen/">Valen & amigos</a>. Para consultar, escribime a <a href="mailto:molinapablo72@gmail.com">molinapablo72@gmail.com</a> o al <a href="https://wa.me/5492644151881">WhatsApp 264 415 1881</a>.</div></noscript>
+  <dialog class="project-dialog" id="project-dialog" aria-labelledby="dialog-title"><button class="dialog-close" type="button" aria-label="Cerrar proyecto">×</button><div class="dialog-cover"><img id="dialog-image" src="assets/images/mawe-desktop.jpg" alt="" width="1440" height="900"></div><div class="dialog-content"><p class="eyebrow" id="dialog-category"></p><h2 id="dialog-title"></h2><p id="dialog-description"></p><ul id="dialog-features"></ul><p class="dialog-note" id="dialog-note"></p><div class="dialog-actions"><a class="button button-accent" id="dialog-demo" href="proyectos/mawe/index.html" target="_blank" rel="noopener noreferrer">Recorrer la demo <svg class="icon"><use href="#arrow-up"/></svg></a><a class="quiet-link" id="dialog-consult" href="#contacto">Quiero una web así ↗</a></div></div></dialog>
+  <noscript><style>[data-aos]{opacity:1!important;transform:none!important}.menu-toggle,.project-filters,.motion-toggle{display:none!important}@media(max-width:760px){#navigation{display:flex!important;position:static;flex-wrap:wrap;box-shadow:none;border:0;padding:10px 0;gap:16px}.header-inner{flex-wrap:wrap}}</style><div class="noscript-note">Podés recorrer los proyectos en <a href="proyectos/mawe/index.html">Mawe</a>, <a href="proyectos/contador/index.html">Federico Molina</a> y <a href="proyectos/valen/index.html">Valen & amigos</a>. Para consultar, escribime a <a href="mailto:molinapablo72@gmail.com">molinapablo72@gmail.com</a> o al <a href="https://wa.me/5492644151881">WhatsApp 264 415 1881</a>.</div></noscript>
 </body>
 </html>
